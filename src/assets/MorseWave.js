@@ -5,13 +5,34 @@ const DITS_PER_WORD = 50
 
 var MorseWave = class {
   constructor (message) {
+    if (!MorseNode.create('ITU').isValid(message, 'morse')) {
+      throw new Error('Error: MorseWave constructor\'s argument must be morse code')
+    }
+
     this.message = message
     this._wpm = 20
     this._fwpm = 20
+    this._sampleRate = 8000 // How many signals per second. Value higher, sound quality better. Phone usually use 8000Hz
+    this._frequency = 550   // Pitch, influence high or low of sound level
+
+    var data = this.GetPCMData()
+    this.wave = new RifeWave(data)
   }
 
   get Wpm () {
     return this._wpm
+  }
+
+  get Fwpm () {
+    return this._fwpm
+  }
+
+  get SampleRate () {
+    return this._sampleRate
+  }
+
+  get Frequency () {
+    return this._frequency
   }
 
   set Wpm (wpm) {
@@ -21,15 +42,21 @@ var MorseWave = class {
     }
   }
 
-  get Fwpm () {
-    return this._fwpm
-  }
-
   set Fwpm (fwpm) {
     this._fwpm = fwpm
     if (fwpm > this._wpm) {
       this._wpm = fwpm
     }
+  }
+
+  set SampleRate (sampleRate) {
+    if (sampleRate === this._sampleRate) return
+    this._sampleRate = sampleRate
+  }
+
+  set Frequency (frequency) {
+    if (frequency === this._frequency) return
+    this._frequency = frequency
   }
 
   GetTimings () {
@@ -43,12 +70,6 @@ var MorseWave = class {
   }
 
   GetTimingsGeneral (ditTime, dahTime, signalSpaceTime, charSpaceTime, wordSpaceTime) {
-    var coder = MorseNode.create('ITU')
-    if (!coder.isValid(this.message, 'morse')) {
-      console.log('Warnning: cannot compute timings')
-      return []
-    }
-
     let dit = '.'
     let dah = '-'
     let charSpace = ' '
@@ -62,7 +83,7 @@ var MorseWave = class {
       [charSpace]: -charSpaceTime,
       [wordSpace]: -wordSpaceTime
     }
-    console.log(code2TimeHash)
+
     for (let i = 0; i < codes.length; i++) {
       let previousCode = codes[i - 1]
       let code = codes[i]
@@ -73,37 +94,23 @@ var MorseWave = class {
 
       if ([dit, dah, charSpace, wordSpace].includes(code)) {
         times.push(code2TimeHash[code])
-        console.log(code === ' ')
       }
     }
     return times
   }
-}
-
-var CWWave = class {
-  constructor (message) {
-    this.cw = new MorseWave(message)
-    this.sampleRate = 8000 // How many signals per second. Value higher, sound quality better. Phone usually use 8000Hz
-    this.frequency = 550   // Pitch, influence high or low of sound level
-
-    var data = this.GetPCMData()
-    this.wave = new RifeWave(data)
-  }
 
   GetPCMData () {
-    let timings = this.cw.GetTimings()
+    let timings = this.GetTimings()
     if (timings.length === 0) {
       return []
     }
 
-    console.log(timings.join(',\n'))
-
     let signals = []
-    let counterIncrementAmount = Math.PI * 2 * this.frequency / this.sampleRate
+    let counterIncrementAmount = Math.PI * 2 * this.Frequency / this.SampleRate
 
     for (let i = 0; i < timings.length; i++) {
       let time = Math.abs(timings[i]) / 1000
-      var duration = this.sampleRate * time
+      var duration = this.SampleRate * time
 
       if (timings[i] < 0) {
         var silenceData = new Array(duration).fill(0)
@@ -135,4 +142,4 @@ var CWWave = class {
   }
 }
 
-export default CWWave
+export default MorseWave
