@@ -24,14 +24,18 @@
         <h2 class="subtitle">
           查詢紀錄
         </h2>
-        <p v-show="records.length === 0">
+        <p class="control" v-show="records.length === 0">
           尚無紀錄
         </p>
+        <p class="control" v-show="records.length > 0">
+          點擊紀錄的藍色標題橫槓，可以播放該訊息摩斯電碼的音效。
+        </p>
         <article class="message is-info" v-for="record in records">
-          <div class="message-header">
+          <div class="message-header" @click="Play(record.text)">
             <div class="columns">
               <div class="column is-half">
                 # {{records.length - $index}}
+                </a>
               </div>
               <div class="column is-half has-text-right">
                 {{record.time}}
@@ -110,7 +114,6 @@ export default {
           code: this.output,
           time: GetNowDateFormate()
         })
-        this.Play(this.input)
         return
       }
 
@@ -151,6 +154,9 @@ export default {
 </script>
 
 <style>
+  article .message-header {
+    cursor: pointer;
+  }
   .notification .copy {
     border-radius: 0 3px;
     float: right;
