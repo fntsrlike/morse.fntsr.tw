@@ -22,11 +22,21 @@
       <section>
         <h1 class="title">Records</h1>
         <h2 class="subtitle">
-          本次編解碼的紀錄
+          查詢紀錄
         </h2>
+        <p v-show="records.length === 0">
+          尚無紀錄
+        </p>
         <article class="message is-info" v-for="record in records">
           <div class="message-header">
-            # {{records.length - $index}}
+            <div class="columns">
+              <div class="column is-half">
+                # {{records.length - $index}}
+              </div>
+              <div class="column is-half has-text-right">
+                {{record.time}}
+              </div>
+            </div>
           </div>
           <div class="message-body">
             <div class="columns">
@@ -67,9 +77,14 @@
 /* eslint-disable no-new */
 // import Morse from '../assets/Morse'
 import MorseWave from '../assets/MorseWave'
+import moment from 'moment'
 
 var morse = require('morse-node').create('ITU')
 var Clipboard = require('clipboard')
+
+var GetNowDateFormate = function () {
+  return moment().format('YYYY-MM-DD HH:mm:ss')
+}
 
 new Clipboard('.copy.button')
 
@@ -92,7 +107,8 @@ export default {
         this.output = morse.encode(this.input)
         this.records.unshift({
           text: this.input,
-          code: this.output
+          code: this.output,
+          time: GetNowDateFormate()
         })
         this.Play(this.input)
         return
@@ -107,7 +123,8 @@ export default {
         this.output = morse.decode(this.input)
         this.records.unshift({
           text: this.output,
-          code: this.input
+          code: this.input,
+          time: GetNowDateFormate()
         })
         return
       }

@@ -16,6 +16,7 @@
     "babel-runtime": "^6.0.0",
     "bulma": "^0.2.1",
     "clipboard": "^1.5.12",
+    "moment": "^2.15.1",
     "vue": "^1.0.21"
   },
   "devDependencies": {
