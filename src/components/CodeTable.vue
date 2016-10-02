@@ -3,7 +3,7 @@
     <h3 class="title">{{ title }}</h3>
     <h3 class="subtitle">{{ subtitle }}</h3>
     <div class="columns is-gapless is-multiline is-mobile">
-      <div class="code" v-for="code in codes" @click="Play(code)">
+      <div class="code" v-for="code in codes" @click="Play(Encode(code))">
         <p class="heading">{{Encode(code)}}</p>
         <p class="title">{{code}}</p>
       </div>
@@ -12,23 +12,8 @@
 </template>
 
 <script>
-  var morse = require('morse-node').create('ITU')
-  import MorseWave from '../assets/MorseWave'
-
   export default {
-    props: ['title', 'subtitle', 'codes'],
-    methods: {
-      Encode: function (text) {
-        return morse.encode(text)
-      },
-      Play: function (text) {
-        var morseCode = morse.encode(text)
-        var wave = new MorseWave(morseCode)
-        var audio = document.createElement('audio')
-        audio.src = wave.GetDataURI()
-        audio.play()
-      }
-    }
+    props: ['title', 'subtitle', 'codes', 'Encode', 'Play']
   }
 </script>
 
