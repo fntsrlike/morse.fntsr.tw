@@ -119,24 +119,24 @@ var MorseWave = class {
       let sampleNumber = Math.round(this.SampleRate * seconds)
 
       if (_.has(samples, key)) {
-        data.push.apply(data, samples[key])
+        data.push(samples[key])
         continue
       }
 
       let sample = []
       if (isSpace) {
         sample = this.GenerateEmptySignal(sampleNumber)
-        data = data.concat(sample)
+        data.push(sample)
         samples[key] = sample
         continue
       }
 
       sample = this.GenerateSignal(sampleNumber)
       samples[key] = sample
-      data.push.apply(data, sample)
+      data.push(sample)
     }
 
-    return data
+    return [].concat.apply([], data)
   }
 
   GetWav () {
