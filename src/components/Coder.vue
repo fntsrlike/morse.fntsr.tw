@@ -179,9 +179,14 @@ export default {
 </script>
 
 <style>
+  article {
+    word-wrap: break-word;
+  }
+
   article .message-header {
     cursor: pointer;
   }
+
   .notification .copy {
     border-radius: 0 3px;
     float: right;
