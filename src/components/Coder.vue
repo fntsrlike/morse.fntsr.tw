@@ -30,12 +30,17 @@
         <p class="control" v-show="records.length > 0">
           點擊紀錄的藍色標題橫槓，可以播放該訊息摩斯電碼的音效。
         </p>
-        <article class="message is-info" v-for="record in records">
-          <div class="message-header" @click="Play(record.text)">
+        <article class="message"
+                  v-for="record in records"
+                  v-bind:class="{
+                    'is-info': !record.IsPlaying,
+                    'is-success': record.IsPlaying,
+                  }"
+                 >
+          <div class="message-header" @click="Play(record)">
             <div class="columns">
               <div class="column is-half">
                 # {{records.length - $index}}
-                </a>
               </div>
               <div class="column is-half has-text-right">
                 {{record.time}}
@@ -79,7 +84,6 @@
 
 <script>
 /* eslint-disable no-new */
-// import Morse from '../assets/Morse'
 import MorseWave from '../assets/MorseWave'
 import moment from 'moment'
 
@@ -112,7 +116,9 @@ export default {
         this.records.unshift({
           text: this.input,
           code: this.output,
-          time: GetNowDateFormate()
+          time: GetNowDateFormate(),
+          audio: null,
+          IsPlaying: false
         })
         return
       }
@@ -127,7 +133,9 @@ export default {
         this.records.unshift({
           text: this.output,
           code: this.input,
-          time: GetNowDateFormate()
+          time: GetNowDateFormate(),
+          audio: null,
+          IsPlaying: false
         })
         return
       }
@@ -142,12 +150,29 @@ export default {
       this.isInputChars = morse.isValid(this.input, 'chars')
       this.isInputMorse = morse.isValid(this.input, 'morse')
     },
-    Play: function (text) {
-      var morseCode = morse.encode(text)
-      var wave = new MorseWave(morseCode)
-      var audio = document.createElement('audio')
-      audio.src = wave.GetDataURI()
-      audio.play()
+    Play: function (record) {
+      if (record.IsPlaying) {
+        record.audio.pause()
+        record.audio.currentTime = 0
+        record.IsPlaying = false
+        return
+      }
+
+      if (!record.audio) {
+        var morseCode = morse.encode(record.text)
+        var wave = new MorseWave(morseCode)
+
+        record.audio = document.createElement('audio')
+        record.audio.src = wave.GetDataURI()
+        record.audio.addEventListener('playing', function () {
+          record.IsPlaying = true
+        })
+        record.audio.addEventListener('ended', function () {
+          record.IsPlaying = false
+        })
+      }
+
+      record.audio.play()
     }
   }
 }
