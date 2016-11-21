@@ -2,26 +2,102 @@
 <section id="introduction" class="section is-medium">
   <div class="container">
     <div class="heading">
-      <h1 class="title is-2">Introduction</h1>
+      <h2 class="title is-2">Introduction</h2>
       <h2 class="subtitle is-4">
         關於摩斯電碼
       </h2>
     </div>
-    <section class="content is-medium">
-      <p>
-        最早的摩斯電碼是一些表示數字的點和劃。數字對應單詞，需要尋找一本代碼表才能知道每個詞對應的數。用一個電鍵可以敲擊出點、劃以及中間的停頓。
-      </p>
-      <p>
-        雖然摩斯發明了電報，但他缺乏相關的專門技術。他與艾爾菲德·維爾簽定了一個協定，讓他幫自己製造更加實用的裝置。艾爾菲德·維爾構思了一個方案，通過點、劃和中間的停頓，可以讓每個字元和標點符號彼此獨立地傳送出去。他們達成一致，同意把這種標識不同符號的方案放到摩斯的專利中。這就是現在我們所熟知的美式摩斯電碼，它被用來傳送了世界上第一條電報。
-      </p>
-      <p>
-        電報公司根據要發的信的長度收費。商業代碼精心設計了五個字元組成一組的代碼，做為一個單詞傳送。比如：BYOXO（Are you trying to crawl out of it?）；LIOUY（Why do you not answer my question? 為什麼不回覆？）；AYYLU（Not clearly coded, repeat more clearly. 編碼不清楚，請清楚重覆）。這些五個字元的簡語可以用摩斯電碼單獨傳送。有些簡語後來在現代的網路上常用，如CUL（See you later. 再見）。
-      </p>
-      <p>
-        現在仍然在業餘無線電中使用的有Q簡語和Z簡語：他們最初是為報務員之間交流通訊品質、頻率變更、電報編號等資訊服務的；還有在手提電話的訊息鈴聲中，廠商依然會將「SMS（···－－···）」一句的摩斯電碼加入，而香港的無綫電視，自1976年起，每次新聞報道亦會在背景音樂中播放「NEWS TODAY」的音頻。
-      </p>
+    <div class="content is-medium">
+      <section>
+        <p>
+          每個摩斯電碼，無論是文字字元 (字母、數字) 或是符號都會以相異的<b>長、短音</b>序列去呈現。在時間長度上，通常以短音的時間作為標準，長音的時間會是短音時間的三倍，每個長短音之間都會以一個和短音相同時間間隔的停頓去區隔，每個字元、符號之間則是以三倍短音時間的停頓區隔，而每個單詞（word）則是以七倍短音時間的停頓區隔。
+        </p>
+        <p>
+          而為了提高通訊的速度，在設計字元的摩斯電碼序列時，會去參考該字元在英文裡出現的頻率做考量，若是越常出現的字元，序列就會越短。就像是英文裡最通用的字元 <code>E</code>，就只使用一個短音做表示。另外為了緊急通訊的便利，也會將一些方便發送且辨識的訊號賦予特殊意義，像是在國際上作為求救訊號的 <code>SOS</code> 就是一個知名的例子，該訊號會以「三短、三長、三短」簡單且易辨別的電碼序列發送。另一方面，為了縮短需要發送的電碼長度，也會透過將常用的語句進行縮寫，像是以 <code>RX</code> 代表 <code>Receive</code>、<code>SN</code> 作為 <code>Soon</code>、<code>SRI</code> 作為 <code>Sorry</code> 等等。
+        </p>
+        <p>
+          摩斯電碼在歷史發展上歷經數次變革，主要有三種版本，第一個是由 Morce 提出的最初版本 American Morse，第二個是由 Gerke 修改過後用在德國鐵路上的 Continental 版本，第三種是以國際電信聯盟 (ITU) 所制定的 International 版本。本站的電碼是使用 ITU 制定的標準。
+        </p>
+      </section>
+      <section>
+        <h3 class="title is-3">書寫</h3>
+        <p>
+          在慣例上，會使用點號 (dot) <code>.</code> 代表短音 (dit)、破折號 (dash) <code>-</code> 代表長音 (dah)、空白 (space) <code>&nbsp;</code> 代表區隔字母、符號的短停頓、斜線 (slash) <code>/</code> 代表單詞間的長停頓。如下方表格以 <code>Morse Code</code> 作為範例，依序將每個字母和空白轉成摩斯電碼，即可得到 <code>-- --- .-. ... . / -.-. --- -.. .</code> 的密文；同樣的，也可以將密文反解析為原文。
+        </p>
+        <table class="table is-bordered has-text-centered">
+          <thead>
+            <tr>
+              <th colspan="10">Morse Code</th>
+            </tr>
+          </thead>
+          <tbody style="font-family: monospace">
+          <tr>
+            <td>M</td>
+            <td>o</td>
+            <td>r</td>
+            <td>s</td>
+            <td>e</td>
+            <td>&nbsp;</td>
+            <td>C</td>
+            <td>o</td>
+            <td>d</td>
+            <td>e</td>
+          </tr>
+          <tr>
+            <td>--</td>
+            <td>---</td>
+            <td>.-.</td>
+            <td>...</td>
+            <td>.</td>
+            <td>/</td>
+            <td>-.-.</td>
+            <td>---</td>
+            <td>-..</td>
+            <td>.</td>
+          </tr>
+          <tr>
+            <td colspan="10">
+              -- --- .-. ... . / -.-. --- -.. .
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h3 class="title is-3">參考資料</h3>
+        <ul>
+          <li>
+              本站開發記事 (待編寫)
+          </li>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/Morse_code">
+              維基百科 - 摩斯電碼 (英文)
+            </a>
+          </li>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/International_Telecommunication_Union">
+              維基百科 - 國際電信聯盟 (英文)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=lpCxnp20vhI">
+              Youtube - Morse Code Song
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=ncOcgarGJHI">
+              Youtube - 摩斯電報發送教學 (日語、英文字幕)
+            </a>
+          </li>
+          <li>
+            <a href="http://morsecode.scphillips.com/translator.html">
+              Morse Code Translator (英文)
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
-  </section>
+  </div>
 </section>
 </template>
 
@@ -38,12 +114,7 @@ export default {
 </script>
 
 <style>
-
-/*#introduction {
-  background: #3273dc;
-}
-
-#introduction .title, #introduction .subtitle, #introduction .content {
-  color: white;
-}*/
+  table.has-text-centered td, table.has-text-centered th {
+    text-align: center;
+  }
 </style>
