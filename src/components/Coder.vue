@@ -7,10 +7,12 @@
       </div>
       <section>
         <div class="control">
-          <textarea id="input" class="textarea is-medium"
-            v-bind:class="{ 'is-danger': !isInputValid }"
-            v-model="input" v-on:keyup="JudgeInput"
-            placeholder="{{placeholder}}"></textarea>
+          <textarea id="input"
+                    class="textarea is-medium"
+                    v-bind:class="{ 'is-danger': !isInputValid }"
+                    v-model="input"
+                    v-on:keyup="JudgeInput"
+                    placeholder="{{placeholder}}"></textarea>
           <span class="help is-danger" v-show="!isInputValid">欄位不得為空</span>
         </div>
         <div class="control">
@@ -90,6 +92,9 @@ import moment from 'moment'
 var morse = require('morse-node').create('ITU')
 var Clipboard = require('clipboard')
 
+let validDit = /[·・．。]/g
+let validDah = /[_＿－]/g
+
 var GetNowDateFormate = function () {
   return moment().format('YYYY-MM-DD HH:mm:ss')
 }
@@ -127,12 +132,13 @@ export default {
       this.output = 'Error! Invalid text.'
     },
     Decode: function () {
-      if (morse.isValid(this.input, 'morse')) {
+      let code = this.input.replace(validDit, '.').replace(validDah, '-')
+      if (morse.isValid(code, 'morse')) {
         this.isInputValid = true
-        this.output = morse.decode(this.input)
+        this.output = morse.decode(code)
         this.records.unshift({
           text: this.output,
-          code: this.input,
+          code: code,
           time: GetNowDateFormate(),
           audio: null,
           IsPlaying: false
@@ -147,8 +153,11 @@ export default {
       this.input = ''
     },
     JudgeInput: function () {
-      this.isInputChars = morse.isValid(this.input, 'chars')
-      this.isInputMorse = morse.isValid(this.input, 'morse')
+      let msg = this.input
+      this.isInputChars = morse.isValid(msg, 'chars')
+
+      let code = this.input.replace(validDit, '.').replace(validDah, '-')
+      this.isInputMorse = morse.isValid(code, 'morse')
     },
     Play: function (record) {
       if (record.IsPlaying) {

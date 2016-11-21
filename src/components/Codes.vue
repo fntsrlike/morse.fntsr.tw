@@ -2,13 +2,13 @@
   <section>
     <div class="container">
       <div class="heading">
-        <h2 class="title is-3">Codes</h1>
+        <h2 class="title is-3">Codes</h2>
         <h2 class="subtitle is-5">
           摩斯電碼
         </h2>
       </div>
       <p class="control">
-        本節會列出解碼器所支援的摩斯訊號字元
+        本節會列出本站解碼器所支援的摩斯訊號字元
       </p>
       <section>
         <h3 class="title is-4">Dit</h3>
