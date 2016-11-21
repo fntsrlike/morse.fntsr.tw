@@ -67,7 +67,9 @@
         <h3 class="title is-3">參考資料</h3>
         <ul>
           <li>
+            <a href="#">
               本站開發記事 (待編寫)
+            </a>
           </li>
           <li>
             <a href="https://en.wikipedia.org/wiki/Morse_code">

@@ -80,6 +80,9 @@ module.exports = {
       }
     ]
   },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "../node_modules/bulma")]
+  },
   eslint: {
     formatter: require('eslint-friendly-formatter')
   },
