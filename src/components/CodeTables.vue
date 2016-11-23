@@ -6,6 +6,7 @@
         <h2 class="subtitle is-4">
           摩斯電碼對照表
         </h2>
+        <p class="subtitle is-6">點擊字母或符號，會播放對應的摩斯電碼音效。</p>
       </div>
       <code-table title="Alphabets" subtitle="英文字母" :codes="alphabets" :Encode="Encode" :Play="Play"></code-table>
       <code-table title="Numbers" subtitle="數字" :codes="numbers" :Encode="Encode" :Play="Play"></code-table>
