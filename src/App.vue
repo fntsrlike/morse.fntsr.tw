@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style>
-.section section {
-  margin-top: 2rem;
-}
+  .section section {
+    margin-top: 2rem;
+  }
 </style>
