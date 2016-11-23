@@ -15,7 +15,7 @@
         <h3 class="subtitle is-6">短音</h3>
         <div class="columns is-gapless is-multiline is-mobile">
           <div class="code" @click="Play('.')">
-            <p class="heading">dot / 半形句點</p>
+            <p class="heading" title="dot">半形句點</p>
             <p class="title">.</p>
           </div>
           <div class="code" @click="Play('.')">
@@ -44,11 +44,11 @@
         </p>
         <div class="columns is-gapless is-multiline is-mobile">
           <div class="code" @click="Play('-')">
-            <p class="heading">dash / 減號</p>
+            <p class="heading" title="dash">半形破折號</p>
             <p class="title">-</p>
           </div>
           <div class="code" @click="Play('-')">
-            <p class="heading">underscore / 底線</p>
+            <p class="heading" title="underscore">底線</p>
             <p class="title">_</p>
           </div>
           <div class="code" @click="Play('-')">
@@ -69,11 +69,11 @@
         </p>
         <div class="columns is-gapless is-multiline is-mobile">
           <div class="code" @click="Play(' ')">
-            <p class="heading">space / 空格</p>
+            <p class="heading" title="space">空格</p>
             <p class="title">&nbsp;</p>
           </div>
           <div class="code" @click="Play('/')">
-            <p class="heading">slash / 斜線</p>
+            <p class="heading" title="slash">斜線</p>
             <p class="title">/</p>
           </div>
         </div>
