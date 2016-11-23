@@ -75,19 +75,25 @@ export default {
     word-wrap: break-word;
   }
 
-  @media screen and (max-width: 512px) {
+  @media screen and (max-width: 320px) {
+    .code {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: 321px) and (max-width: 512px) {
     .code {
       width: 25%;
     }
   }
 
-  @media screen and (min-width: 512px) {
+  @media screen and (min-width: 513px)  and (max-width: 1024px) {
     .code {
       width: 16.66667%;
     }
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1025px) {
     .code {
       width: 12.5%;
     }

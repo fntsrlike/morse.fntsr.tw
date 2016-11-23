@@ -7,7 +7,7 @@
       </div>
       <section>
         <div class="control">
-          <textarea id="input"
+          <textarea id="input-box"
                     class="textarea is-medium"
                     v-bind:class="{ 'is-danger': !isInputValid }"
                     v-model="input"
@@ -210,7 +210,7 @@ export default {
     color: black;
   }
 
-  #input {
+  #input-box {
     font-family: monospace;
     font-size: 1rem;
     line-height: 1.5rem;
