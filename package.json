@@ -1,7 +1,7 @@
 {
   "name": "morse",
   "version": "1.0.0",
-  "description": "Morse password coder",
+  "description": "Morse code encode/decode tool",
   "author": "Ruoshi Lin <me@fntsr.tw>",
   "private": true,
   "scripts": {

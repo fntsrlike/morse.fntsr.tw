@@ -1,6 +1,6 @@
 # morse
 
-> Morse password coder
+> Morse code encode/decode tool
 
 ## Build Setup
 
